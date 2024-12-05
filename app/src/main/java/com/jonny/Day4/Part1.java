@@ -63,7 +63,7 @@ public class Part1 {
 	}
 
 	private static Character getVertical(int originX, int originY, int offset) {
-		//-ve offset = down, +ve offset = 
+		//-ve offset = down, +ve offset = up
 
 		//default
 		Character returnChar = 'Z';
