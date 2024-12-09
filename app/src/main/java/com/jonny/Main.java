@@ -16,6 +16,8 @@ public class Main {
 
 		String part = scanner.nextLine();
 
+		long startTime = System.nanoTime();
+
 		try {
 			String className = "com.jonny.Day" + day + ".Part" + part;
 			Class<?> clazz = Class.forName(className);
@@ -25,6 +27,11 @@ public class Main {
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 		}
+
+		long endTime = System.nanoTime();
+
+		long duration = endTime - startTime;
+		System.out.println("Execution time: " + (duration / 1_000_000) + " ms");
 
 		scanner.close();
 	}

@@ -119,8 +119,6 @@ public class Part2 {
 
 	public static void main() {
 
-		long startTime = System.nanoTime();
-
 		Helpers helper = new Helpers();
 
 		List<String> lines = helper.readInput("5");
@@ -130,10 +128,5 @@ public class Part2 {
 		int output = checkUpdates();
 
 		System.out.println(output);
-
-		long endTime = System.nanoTime();
-
-		long duration = endTime - startTime;
-		System.out.println("Execution time: " + (duration / 1_000_000) + " ms");
 	}
 }
