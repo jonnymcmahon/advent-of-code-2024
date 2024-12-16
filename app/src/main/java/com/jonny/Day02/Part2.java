@@ -166,7 +166,7 @@ public class Part2 {
 
 		Helpers helper = new Helpers();
 
-		List<String> lines = helper.readInput("2");
+		List<String> lines = helper.readInput("02");
 
 		List<int[]> puzzleInput = parseInput(lines);
 

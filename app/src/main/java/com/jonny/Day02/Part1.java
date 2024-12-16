@@ -105,7 +105,7 @@ public class Part1 {
 
 		Helpers helper = new Helpers();
 
-		List<String> lines = helper.readInput("2");
+		List<String> lines = helper.readInput("02");
 
 		List<int[]> puzzleInput = parseInput(lines);
 

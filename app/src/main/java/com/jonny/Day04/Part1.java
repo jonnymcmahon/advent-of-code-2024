@@ -261,7 +261,7 @@ public class Part1 {
 
 		Helpers helper = new Helpers();
 
-		List<String> lines = helper.readInput("4");
+		List<String> lines = helper.readInput("04");
 
 		parseInput(lines);
 

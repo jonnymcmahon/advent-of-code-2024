@@ -100,7 +100,7 @@ public class Part1 {
 
 		Helpers helper = new Helpers();
 
-		List<String> lines = helper.readInput("9");
+		List<String> lines = helper.readInput("09");
 
 		List<Integer> diskMap = parseInput(lines);
 

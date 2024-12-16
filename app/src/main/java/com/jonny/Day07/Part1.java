@@ -126,7 +126,7 @@ public class Part1 {
 
 		Helpers helper = new Helpers();
 
-		List<String> lines = helper.readInput("7");
+		List<String> lines = helper.readInput("07");
 
 		parseInput(lines);
 

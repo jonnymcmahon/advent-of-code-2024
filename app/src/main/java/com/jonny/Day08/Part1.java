@@ -4,7 +4,7 @@ import java.util.*;
 
 import com.jonny.Helpers;
 
-public class Part2 {
+public class Part1 {
 
 	private static Map<Character, List<List<Integer>>> antennae;
 	private static Set<List<Integer>> antinodes;
@@ -16,7 +16,7 @@ public class Part2 {
 
 		setLimits(lines);
 
-		Part2.antennae = new HashMap<>();
+		Part1.antennae = new HashMap<>();
 
 		//read it in starting at the bottom, so that positive y goes up later on
 		for (int y = lines.size() - 1; y >= 0; y--) {
@@ -28,9 +28,9 @@ public class Part2 {
 				if (line.charAt(x) != '.') {
 
 					//because we're reading it in from bottom to top, find actual y coordinate of antenna
-					int yCoord = Part2.yLimit - y;
+					int yCoord = Part1.yLimit - y;
 					
-					Part2.antennae.putIfAbsent(line.charAt(x), new ArrayList<>());
+					Part1.antennae.putIfAbsent(line.charAt(x), new ArrayList<>());
 
 					antennae.get(line.charAt(x)).add(List.of(x, yCoord));
 				}
@@ -40,15 +40,15 @@ public class Part2 {
 
 	private static void setLimits(List<String> lines) {
 
-		Part2.yLimit = lines.size() - 1;
-		Part2.xLimit = lines.get(0).length() - 1;
+		Part1.yLimit = lines.size() - 1;
+		Part1.xLimit = lines.get(0).length() - 1;
 	}
 
 	private static void findAntinodes() {
 
-		Part2.antinodes = new HashSet<>();
+		Part1.antinodes = new HashSet<>();
 
-		for (Map.Entry<Character, List<List<Integer>>> character: Part2.antennae.entrySet()) {
+		for (Map.Entry<Character, List<List<Integer>>> character: Part1.antennae.entrySet()) {
 			
 			Character targetChar = character.getKey();
 			List<List<Integer>> locations = character.getValue();
@@ -86,39 +86,26 @@ public class Part2 {
 		int xDiff = targetLocation.get(0) - originLocation.get(0);
 		int yDiff = targetLocation.get(1) - originLocation.get(1);
 
-		//add an antinode for both target and original location
-		Part2.antinodes.add(originLocation);
-		Part2.antinodes.add(targetLocation);
+		int antinodeX = targetLocation.get(0) + xDiff;
+		int antinodeY = targetLocation.get(1) + yDiff;
 
-		//initialise antinodeX and Y
-		int antinodeX = targetLocation.get(0);
-		int antinodeY = targetLocation.get(1);
-		
-		while(true) {
-
-			antinodeX += xDiff;	
-			antinodeY += yDiff;
-
-			//if either has exceeded bounds of grid, break
-			if (antinodeX > Part2.xLimit || antinodeX < 0 || antinodeY > Part2.yLimit || antinodeY < 0) {
-				break;
-			}
-
-			//otherwise add antinode and keep going
-			Part2.antinodes.add(List.of(antinodeX, antinodeY));
+		if (antinodeX > Part1.xLimit || antinodeX < 0 || antinodeY > Part1.yLimit || antinodeY < 0) {
+			return;
 		}
+
+		Part1.antinodes.add(List.of(antinodeX, antinodeY));
 	}
 
 	public static void main() {
 
 		Helpers helper = new Helpers();
 
-		List<String> lines = helper.readInput("8");
+		List<String> lines = helper.readInput("08");
 
 		parseInput(lines);
 
 		findAntinodes();
 
-		System.out.println(Part2.antinodes.size());
+		System.out.println(Part1.antinodes.size());
 	}
 }

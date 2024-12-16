@@ -166,7 +166,7 @@ public class Part1 {
 
 		Helpers helper = new Helpers();
 
-		List<String> lines = helper.readInput("6");
+		List<String> lines = helper.readInput("06");
 
 		parseInput(lines);
 

@@ -7,32 +7,9 @@ import java.util.List;
 
 import com.jonny.Helpers;
 
-public class Part2 {
+public class Part1 {
 
-	private static String removeDonts(List<String> lines) {
-
-		String puzzleInput = "";
-
-		for (int i = 0; i < lines.size(); i++) {
-
-			puzzleInput = puzzleInput + lines.get(i);
-		}
-
-		String regexDonts = "(?<=don't\\(\\)).*?(?=do\\(\\)|don't\\(\\)|$)";
-
-		Pattern patternDonts = Pattern.compile(regexDonts);
-
-		Matcher matcherDonts = patternDonts.matcher(puzzleInput);
-
-		while (matcherDonts.find()) {
-
-			puzzleInput = puzzleInput.replace(matcherDonts.group(), "");
-		}
-
-		return puzzleInput;
-	}
-
-	private static List<String> parseInput(String puzzleInput) {
+	private static List<String> parseInput(List<String> lines) {
 
 		String regex = "mul\\(\\d+,\\d+\\)";
 
@@ -40,17 +17,21 @@ public class Part2 {
 
 		List<String> muls = new ArrayList<>();
 
-		Matcher matcher = pattern.matcher(puzzleInput);
+		for (int i = 0; i < lines.size(); i++) {
 
-		while (matcher.find()) {
-			muls.add(matcher.group());
+			String puzzleInput = lines.get(i);
+
+			Matcher matcher = pattern.matcher(puzzleInput);
+
+			while (matcher.find()) {
+				muls.add(matcher.group());
+			}
 		}
 
 		return muls;
 	}
 
 	private static int doMultiplication(List<String> puzzleInput) {
-
 
 		int output = 0;
 
@@ -88,11 +69,9 @@ public class Part2 {
 
 		Helpers helper = new Helpers();
 
-		List<String> lines = helper.readInput("3");
+		List<String> lines = helper.readInput("03");
 
-		String doSections = removeDonts(lines);
-
-		List<String> puzzleInput = parseInput(doSections);
+		List<String> puzzleInput = parseInput(lines);
 
 		int output = doMultiplication(puzzleInput);
 

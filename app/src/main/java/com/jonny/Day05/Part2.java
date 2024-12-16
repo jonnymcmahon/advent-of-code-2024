@@ -4,15 +4,15 @@ import java.util.*;
 
 import com.jonny.Helpers;
 
-public class Part1 {
+public class Part2 {
 
 	private static List<int[]> rules;
 	private static List<List<Integer>> updates;
 
 	private static void parseInput(List<String> lines) {
 
-		Part1.rules = new ArrayList<>();
-		Part1.updates = new ArrayList<>();
+		Part2.rules = new ArrayList<>();
+		Part2.updates = new ArrayList<>();
 
 		for (int i = 0; i < lines.size(); i++){
 
@@ -24,7 +24,7 @@ public class Part1 {
 				ruleArray[0] = Integer.parseInt(ruleStrArray[0]);
 				ruleArray[1] = Integer.parseInt(ruleStrArray[1]);
 
-				Part1.rules.add(ruleArray);
+				Part2.rules.add(ruleArray);
 			}
 
 			if (lines.get(i).contains(String.valueOf(','))) {
@@ -37,7 +37,7 @@ public class Part1 {
 					updateArray.add(Integer.parseInt(updateStrArray[j]));
 				}
 
-				Part1.updates.add(updateArray);
+				Part2.updates.add(updateArray);
 			}
 		}
 	}
@@ -45,15 +45,30 @@ public class Part1 {
 	private static int checkUpdates() {
 
 		int output = 0;
+		boolean wasIncorrect = false;
 
 		//loop through each update and see if it is valid
-		for (List<Integer> update : Part1.updates){
+		for (List<Integer> update : Part2.updates){
 
-			if(isValidUpdate(update, Part1.rules)) {
-				int middleIndex = update.size() / 2;
+			while(!isValidUpdate(update, Part2.rules)) {
+
+				//if it isn't valid, mark it as incorrect so we can count it for the output
+				wasIncorrect = true;
+
+				//rearrange it until we get the correct order, who cares about time complexity anyway
+				update = rearrangeUpdate(update, Part2.rules);
 				
+			}
+
+			//if update began as incorrect, count it towards output
+			if(wasIncorrect) {
+
+				int middleIndex = update.size() / 2;
+
 				output += update.get(middleIndex);
 			}
+
+			wasIncorrect = false;
 		}
 
 		return output;
@@ -78,11 +93,35 @@ public class Part1 {
 		return true;
 	}
 
+
+	private static List<Integer> rearrangeUpdate(List<Integer> update, List<int[]> rules) {
+
+		//loop through each rule and check if it after appears earlier in the array than before, if so rearrange the array and try again
+		for (int[] rule : rules) {
+
+			int before = rule[0];
+			int after = rule[1];
+			
+			if(update.contains(before) && update.contains(after)) {
+
+				while (update.indexOf(before) > update.indexOf(after)) {
+
+					//if number is in wrong position, move it 1 index back in the List and try again
+					int beforeIndex = update.indexOf(before);
+
+					Collections.swap(update, beforeIndex, beforeIndex - 1);
+				}
+			}
+		}
+
+		return update;
+	}
+
 	public static void main() {
 
 		Helpers helper = new Helpers();
 
-		List<String> lines = helper.readInput("5");
+		List<String> lines = helper.readInput("05");
 
 		parseInput(lines);
 
