@@ -1,4 +1,4 @@
-package com.jonny.Day6;
+package com.jonny.Day06;
 
 import java.util.ArrayList;
 import java.util.List;

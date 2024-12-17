@@ -1,4 +1,4 @@
-package com.jonny.Day7;
+package com.jonny.Day07;
 
 import java.util.*;
 

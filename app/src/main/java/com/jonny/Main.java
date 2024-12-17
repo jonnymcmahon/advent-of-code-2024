@@ -12,9 +12,15 @@ public class Main {
 
 		String day = scanner.nextLine();
 
+		//add a leading 0 if day package required is < 10
+		if (day.length() == 1){ 
+			day = "0" + day;
+		}
+
 		System.out.print("Select puzzle part: ");
 
 		String part = scanner.nextLine();
+
 
 		long startTime = System.nanoTime();
 

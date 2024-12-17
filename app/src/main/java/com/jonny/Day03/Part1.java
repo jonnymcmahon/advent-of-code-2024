@@ -1,4 +1,4 @@
-package com.jonny.Day3;
+package com.jonny.Day03;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;

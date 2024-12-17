@@ -1,4 +1,4 @@
-package com.jonny.Day1;
+package com.jonny.Day01;
 
 import java.util.ArrayList;
 import java.util.HashMap;
